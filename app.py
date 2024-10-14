@@ -36,14 +36,15 @@ def execute_schema():
 
 # Function to create a new student account
 def create_student_account():
+    studentID = input("Enter your Student ID: ")
     name = input("Enter your full name: ")
     email = input("Enter your email: ")
     phone = input("Enter your phone number: ")
     password = input("Enter your password: ")
     
     try:
-        query = "INSERT INTO Students (name, email, phone, password) VALUES (%s, %s, %s, %s)"
-        cursor.execute(query, (name, email, phone, password))
+        query = "INSERT INTO Students (studentID, name, email, phone, password) VALUES (%s,%s, %s, %s, %s)"
+        cursor.execute(query, (studentID, name, email, phone, password))
         conn.commit()
         print("Student account created successfully!")
         student_menu()  # Direct to student menu after successful account creation
@@ -340,6 +341,7 @@ def view_student_loans():
 # Function to request a loan (Student only)
 def get_loan():
     student_id = input("Enter your student ID: ")
+    view_books()
     book_id = input("Enter the book ID you want to loan: ")
 
     try:
@@ -351,7 +353,6 @@ def get_loan():
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         
-# Function to view all book loans
 # Function to view all loans
 def view_all_loans():
     try:
